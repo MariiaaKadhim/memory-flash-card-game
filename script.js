@@ -1,6 +1,12 @@
 const time = document.querySelector("#timer")
 const scores = document.querySelector("#score")
 
+const player1 = localStorage.getItem("player1")
+console.log(`player 1 => ${player1}`)
+
+const player2 = localStorage.getItem("player2")
+console.log(`player 2 => ${player2}`)
+
 // start & stop timer
 
 let seconds = 0
@@ -37,8 +43,6 @@ const gameEnds = () => {
   console.log("Game Over")
 }
 
-startTimer()
-
 // game over text & audio (cheak later)
 
 const playAudio = () => {
@@ -56,7 +60,18 @@ flipCards.forEach((cards) => {
   })
 })
 
-// change players name
-document.getElementById("score").textContent = `${player1}`
+/// change name
+
+// const showNames = () => {
+//   document.getElementById("playerName1").innerHTML = "newText"
+//   document.getElementById("playerName2").innerHTML = "newText"
+// }
+
+const startGame = () => {
+  startTimer()
+  // showNames()
+}
+
+startGame()
 
 // add winning condition and player turns
