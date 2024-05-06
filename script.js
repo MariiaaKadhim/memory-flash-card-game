@@ -1,5 +1,5 @@
 const time = document.querySelector("#timer")
-const scores = document.querySelector("#score")
+const scores = document.querySelectorAll("#score")
 const cards = document.querySelectorAll(".cards")
 
 const player1 = localStorage.getItem("player1")
@@ -16,8 +16,16 @@ let timer
 let isGameActive = false
 let endTimerMessage = "Time is Up."
 
-let score = 0
-let currentTurn = 1
+// let score = 0
+// let playersScore = [
+//   { name: "player1", score: 0 },
+//   { name: "player2", score: 0 },
+// ]
+
+// let currentPlayer = 1
+
+let player1Score = 0
+let player2Score = 0
 
 let flippedCard = false
 let firstCard, secondCard // to choose first then seconed card to see matching cards
@@ -98,9 +106,14 @@ const checkForMatch = () => {
   ) {
     console.log("match!")
     disableCards() // if there is matching
-    score += 5
+
+    switchPlayer()
+
+    firstCard.style.visibility = "hidden"
+    secondCard.style.visibility = "hidden"
   } else {
     unflipCards() // turns both back if there is no matching
+    switchPlayer()
   }
 }
 
@@ -117,11 +130,32 @@ const unflipCards = () => {
     secondCard.parentElement.classList.remove("flip")
   }, 1000)
 }
+// const playerTurn = () => {
+let switchPlayer = (player, points) => {
+  if (player === 1) {
+    player1Score += points
+  } else if (player === 2) {
+    player2Score += points
+  } else {
+    console.log("Invalid player number")
+  }
+}
+
+// to shuffle the cards every time the game start
+let shuffleCards = (cards) => {
+  for (let i = cards - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[cards[i], cards[j]] = [cards[j], cards[i]]
+  }
+  return cards
+}
 
 const startGame = () => {
   startTimer()
   showNames()
   flipCardsListeners()
+
+  shuffleCards()
 }
 
 startGame()
