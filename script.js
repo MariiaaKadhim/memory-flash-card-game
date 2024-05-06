@@ -8,6 +8,9 @@ console.log(`player 1 => ${player1}`)
 const player2 = localStorage.getItem("player2")
 console.log(`player 2 => ${player2}`)
 
+const player1Name = document.getElementById("playerName1")
+const player2Name = document.getElementById("playerName2")
+
 let seconds = 0
 let timer
 let isGameActive = false
@@ -72,11 +75,11 @@ const matchLogic = (card) => {
   }
 }
 
-// const showNames = () => {
-//   // TODO Fix this
-//   document.getElementById("playerName1").innerHTML = "newText"
-//   document.getElementById("playerName2").innerHTML = "newText"
-// }
+const showNames = () => {
+  // TODO Fix this
+  player1Name.innerHTML = `${player1}`
+  player2Name.innerHTML = `${player2}`
+}
 
 const flipCard = (event) => {
   console.log(event.target)
@@ -85,13 +88,6 @@ const flipCard = (event) => {
     matchLogic(event.target)
   }
 }
-
-// const flipCard = (card) => {
-//   if (isGameActive) {
-//     card.classList.toggle("flip")
-//     matchLogic(card)
-//   }
-// }
 
 const checkForMatch = () => {
   console.log(`framework 1 => ${firstCard.dataset.framework}`)
@@ -124,7 +120,7 @@ const unflipCards = () => {
 
 const startGame = () => {
   startTimer()
-  // showNames()
+  showNames()
   flipCardsListeners()
 }
 
