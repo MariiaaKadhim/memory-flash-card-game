@@ -93,7 +93,14 @@
 <p>Try again!</p>
 </div>
 
-<audio id="audio" src="https://mixkit.co/free-sound-effects/game-over/"></audio>
+<!-- <audio id="audio" src="https://mixkit.co/free-sound-effects/game-over/"></audio> -->
+
+<audio id="myAudio">
+  <source src="sound_1.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<button onclick="playAudio()" type="button">Play Audio</button>
 
 <a href="index.html">
   <button>Restart Game</button>

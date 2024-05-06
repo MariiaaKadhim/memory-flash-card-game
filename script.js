@@ -6,6 +6,12 @@ const scores = document.querySelector("#score")
 let seconds = 0
 let timer
 let isGameActive = false
+let endTimerMessage = "Time is Up."
+
+const displayMessage = (message) => {
+  // Show message here. You can use an alert box for example.
+  alert("Game Over")
+}
 
 const startTimer = () => {
   isGameActive = true
@@ -22,6 +28,7 @@ const checkTimer = () => {
     console.log("stopping timer")
     clearInterval(timer)
     gameEnds()
+    displayMessage(endTimerMessage)
   }
 }
 
@@ -30,27 +37,17 @@ const gameEnds = () => {
   console.log("Game Over")
 }
 
-// game over text & audio
-let gameOver = false
-const detectCollisions = () => {
-  // Check if two objects overlap
-  if (seconds === 40) {
-    gameOver = true
-  }
-}
-
-// const gameOverScreen = () => {
-//   document.getElementById("gameOverShow").style.display = "block"
-// }
-
-// gameOverScreen()
 startTimer()
 
-let myAudio = document.querySelector("#audio")
-myAudio.play()
+// game over text & audio (cheak later)
 
-// flip the cards
+const playAudio = () => {
+  console.log("Playing audio...")
+  let myAudio = document.getElementById("myAudio")
+  myAudio.play()
+}
 
+///fil cards
 const flipCards = document.querySelectorAll(".cards")
 
 flipCards.forEach((cards) => {
@@ -60,5 +57,6 @@ flipCards.forEach((cards) => {
 })
 
 // change players name
+document.getElementById("score").textContent = `${player1}`
 
 // add winning condition and player turns
