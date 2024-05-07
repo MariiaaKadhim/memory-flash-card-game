@@ -104,10 +104,11 @@ const checkForMatch = () => {
     secondCard.parentElement.dataset.framework
   ) {
     console.log("match!")
-    hideCards()
+    // hideCards()
     disableCards() // if there is matching
     socreBoread()
   } else {
+    console.log("HERE I AM!")
     unflipCards() // turns both back if there is no matching
   }
   switchPlayer()
@@ -115,11 +116,8 @@ const checkForMatch = () => {
 
 const disableCards = () => {
   // add event listener to check for match
-  for (let i = 0; i < cardsArray.length; i++) {
-    cardsArray[i].addEventListener("click", displayCard)
-  }
-  // firstCard.parentElement.removeEventListener("click", flipCard)
-  // secondCard.parentElement.removeEventListener("click", flipCard)
+  firstCard.parentElement.removeEventListener("click", flipCard)
+  secondCard.parentElement.removeEventListener("click", flipCard)
 }
 
 const hideCards = () => {
@@ -133,6 +131,8 @@ const unflipCards = () => {
   setTimeout(() => {
     firstCard.parentElement.classList.remove("flip")
     secondCard.parentElement.classList.remove("flip")
+    firstCard = ""
+    secondCard = ""
   }, 1000)
 }
 
@@ -160,14 +160,6 @@ function shuffle() {
     card.style.order = ramdomPos
   })
 }
-
-// let shuffleCards = (cards) => {
-//   for (let i = cards - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1))
-//     ;[cards[i], cards[j]] = [cards[j], cards[i]]
-//   }
-//   return cards
-// }
 
 const startGame = () => {
   startTimer()
