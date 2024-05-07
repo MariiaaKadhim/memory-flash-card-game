@@ -3,8 +3,6 @@ const scores = document.querySelectorAll("#score")
 
 const cards = document.querySelectorAll(".cards")
 
-// const cardGame = document.querySelector(".cards")
-
 let imgElements = document.getElementsByClassName("cards")
 let imgElementsArray = [...imgElements] // for shuffling
 
@@ -22,6 +20,7 @@ let timer
 let isGameActive = false
 let endTimerMessage = "Time is Up."
 
+let score = 0
 let player1Score = 0
 let player2Score = 0
 let playerTurn = 1
@@ -118,15 +117,18 @@ const disableCards = () => {
   // add event listener to check for match
   firstCard.parentElement.removeEventListener("click", flipCard)
   secondCard.parentElement.removeEventListener("click", flipCard)
+  firstCard = ""
+  secondCard = ""
 }
 
-const hideCards = () => {
-  if (firstCard.value === secondCard.value) {
-    // to hide match cards when it has been chosen
-    firstCard.parentElement.style.visibility = "hidden"
-    secondCard.parentElement.style.visibility = "hidden"
-  }
-}
+// const hideCards = () => {
+//   if (firstCard.value === secondCard.value) {
+//     // to hide match cards when it has been chosen
+//     firstCard.parentElement.style.visibility = "hidden"
+//     secondCard.parentElement.style.visibility = "hidden"
+
+//   }
+// }
 const unflipCards = () => {
   setTimeout(() => {
     firstCard.parentElement.classList.remove("flip")
