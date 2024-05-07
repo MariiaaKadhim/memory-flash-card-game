@@ -1,6 +1,12 @@
 const time = document.querySelector("#timer")
 const scores = document.querySelectorAll("#score")
+
 const cards = document.querySelectorAll(".cards")
+
+// const cardGame = document.querySelector(".cards")
+
+let imgElements = document.getElementsByClassName("cards")
+let imgElementsArray = [...imgElements] // for shuffling
 
 const player1 = localStorage.getItem("player1")
 console.log(`player 1 => ${player1}`)
@@ -16,16 +22,9 @@ let timer
 let isGameActive = false
 let endTimerMessage = "Time is Up."
 
-// let score = 0
-// let playersScore = [
-//   { name: "player1", score: 0 },
-//   { name: "player2", score: 0 },
-// ]
-
-// let currentPlayer = 1
-
 let player1Score = 0
 let player2Score = 0
+let playerTurn = 1
 
 let flippedCard = false
 let firstCard, secondCard // to choose first then seconed card to see matching cards
@@ -85,8 +84,8 @@ const matchLogic = (card) => {
 
 const showNames = () => {
   // TODO Fix this
-  player1Name.innerHTML = `${player1}`
-  player2Name.innerHTML = `${player2}`
+  player1Name.innerHTML = `${player1}: <span id="score">0</span>`
+  player2Name.innerHTML = `${player2}: <span id="score">0</span>`
 }
 
 const flipCard = (event) => {
@@ -105,57 +104,76 @@ const checkForMatch = () => {
     secondCard.parentElement.dataset.framework
   ) {
     console.log("match!")
+    hideCards()
     disableCards() // if there is matching
-
-    switchPlayer()
-
-    firstCard.style.visibility = "hidden"
-    secondCard.style.visibility = "hidden"
+    socreBoread()
   } else {
     unflipCards() // turns both back if there is no matching
-    switchPlayer()
   }
+  switchPlayer()
 }
 
 const disableCards = () => {
   // add event listener to check for match
-  firstCard.parentElement.removeEventListener("click", flipCard)
-  secondCard.parentElement.removeEventListener("click", flipCard)
+  for (let i = 0; i < cardsArray.length; i++) {
+    cardsArray[i].addEventListener("click", displayCard)
+  }
+  // firstCard.parentElement.removeEventListener("click", flipCard)
+  // secondCard.parentElement.removeEventListener("click", flipCard)
 }
 
+const hideCards = () => {
+  if (firstCard.value === secondCard.value) {
+    // to hide match cards when it has been chosen
+    firstCard.parentElement.style.visibility = "hidden"
+    secondCard.parentElement.style.visibility = "hidden"
+  }
+}
 const unflipCards = () => {
-  // turns both back if there is no matching cards
   setTimeout(() => {
     firstCard.parentElement.classList.remove("flip")
     secondCard.parentElement.classList.remove("flip")
   }, 1000)
 }
-// const playerTurn = () => {
-let switchPlayer = (player, points) => {
-  if (player === 1) {
-    player1Score += points
-  } else if (player === 2) {
-    player2Score += points
+
+const switchPlayer = () => {
+  if (playerTurn === 1) {
+    playerTurn = 2
   } else {
-    console.log("Invalid player number")
+    playerTurn = 1
+  }
+}
+
+const socreBoread = () => {
+  if (playerTurn === 1) {
+    player1Score += 5
+  } else if (playerTurn === 2) {
+    player2Score += 0
   }
 }
 
 // to shuffle the cards every time the game start
-let shuffleCards = (cards) => {
-  for (let i = cards - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[cards[i], cards[j]] = [cards[j], cards[i]]
-  }
-  return cards
+
+function shuffle() {
+  cards.forEach((card) => {
+    let ramdomPos = Math.floor(Math.random() * 12)
+    card.style.order = ramdomPos
+  })
 }
+
+// let shuffleCards = (cards) => {
+//   for (let i = cards - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1))
+//     ;[cards[i], cards[j]] = [cards[j], cards[i]]
+//   }
+//   return cards
+// }
 
 const startGame = () => {
   startTimer()
   showNames()
   flipCardsListeners()
 
-  shuffleCards()
+  shuffle()
 }
-
 startGame()
