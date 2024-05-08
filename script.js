@@ -25,17 +25,13 @@ let player1Score = 0
 let player2Score = 0
 let playerTurn = 1
 
-let winningScore = 5
-let attempts = 0
+let totalFlips = 0
+
+// let winningScore = 5
+// let attempts = 0
 
 let flippedCard = false
 let firstCard, secondCard // to choose first then seconed card to see matching cards
-let lockBoard = false // set to false so when the player click the seconed card it turnes to true
-
-const displayMessage = (message) => {
-  // Show message here. You can use an alert box for example.
-  alert("Game Over")
-}
 
 const startTimer = () => {
   isGameActive = true
@@ -44,17 +40,14 @@ const startTimer = () => {
     time.innerText = `${seconds} sec`
     checkTimer()
     winTime()
-    winnerPlayer()
   }, 1000)
 }
 
 const checkTimer = () => {
-  if (seconds === 60) {
+  if (seconds === 60 || totalFlips === 16) {
     console.log("stopping timer")
     clearInterval(timer)
     gameEnds()
-    displayMessage(endTimerMessage)
-    playAudio()
   }
 }
 
@@ -62,20 +55,12 @@ const winTime = () => {
   if (seconds < 60) {
     console.log("stopping timer")
     isGameActive = true
-    winnerPlayer()
   }
 }
 
 const gameEnds = () => {
   isGameActive = false
   console.log("Game Over")
-}
-
-const winnerPlayer = (winner) => {
-  if (winner === winningScore) {
-    clearInterval()
-    console.log(`Congratulations! you win the round`)
-  }
 }
 
 // game over text & audio (cheak later)
@@ -131,6 +116,7 @@ const checkForMatch = () => {
     secondCard.parentElement.dataset.framework
   ) {
     console.log("match!")
+    totalFlips += 2
     // hideCards()
     disableCards() // if there is matching
     updateScoreBoard()
@@ -143,28 +129,32 @@ const checkForMatch = () => {
 }
 
 const checkForWinner = () => {
+  console.log(totalFlips)
+  let winner = ""
   // Check if all cards have been flipped
-  if (disableCards === flipCardsListeners) {
+  if (totalFlips === 16) {
     console.log("all cards are flipped")
-  }
-  // Who has the higher score
-  else if (player1Score > player2Score) {
-    console.log("player 1 win")
-  } else if (player2Score > player1Score) {
-    console.log("player 2 win")
-  } else {
-    onsole.log("we have a tie")
-  }
-  // Stop timer
-  let timer = setInterval(function () {}, 1000)
+    // Who has the higher score
+    if (player1Score > player2Score) {
+      console.log("player 1 win")
+      winner = player1
+      winAudio()
+      alert(`congragulation ${winner} is the winner `)
+    } else if (player2Score > player1Score) {
+      console.log("player 2 win")
+      winner = player2
+      winAudio()
+      alert(`congragulation ${winner} is the winner `)
+    } else {
+      console.log("we have a tie")
+      playAudio()
+      alert(`it is a tie `)
+    }
+    // Stop timer
 
-  if (winnerDeclared) {
-    clearInterval(timer)
-  }
-  // Announce winner
-  const alertMessage = (winning) => {
-    // Show message here. You can use an alert box for example.
-    alert(`congragulation ${winnerPlayer} is the winner `)
+    checkTimer()
+
+    // Announce winner
   }
 }
 
