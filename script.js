@@ -25,6 +25,9 @@ let player1Score = 0
 let player2Score = 0
 let playerTurn = 1
 
+let winningScore = 5
+let attempts = 0
+
 let flippedCard = false
 let firstCard, secondCard // to choose first then seconed card to see matching cards
 let lockBoard = false // set to false so when the player click the seconed card it turnes to true
@@ -40,11 +43,13 @@ const startTimer = () => {
     seconds++
     time.innerText = `${seconds} sec`
     checkTimer()
+    winTime()
+    winnerPlayer()
   }, 1000)
 }
 
 const checkTimer = () => {
-  if (seconds === 40) {
+  if (seconds === 60) {
     console.log("stopping timer")
     clearInterval(timer)
     gameEnds()
@@ -53,9 +58,24 @@ const checkTimer = () => {
   }
 }
 
+const winTime = () => {
+  if (seconds < 60) {
+    console.log("stopping timer")
+    isGameActive = true
+    winnerPlayer()
+  }
+}
+
 const gameEnds = () => {
   isGameActive = false
   console.log("Game Over")
+}
+
+const winnerPlayer = (winner) => {
+  if (winner === winningScore) {
+    clearInterval()
+    console.log(`Congratulations! you win the round`)
+  }
 }
 
 // game over text & audio (cheak later)
@@ -64,6 +84,12 @@ const playAudio = () => {
   console.log("Playing audio...")
   let myAudio = document.getElementById("myAudio")
   myAudio.play()
+}
+
+const winningAudio = () => {
+  console.log("cong audio...")
+  let winAudio = document.getElementById("winAudio")
+  winAudio.play()
 }
 
 // flipping cards
