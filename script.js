@@ -27,9 +27,6 @@ let playerTurn = 1
 
 let totalFlips = 0
 
-// let winningScore = 5
-// let attempts = 0
-
 let flippedCard = false
 let firstCard, secondCard // to choose first then seconed card to see matching cards
 
@@ -153,7 +150,8 @@ const checkForWinner = () => {
     // Stop timer
 
     checkTimer()
-
+    alert(`Game Over!! Try Again`)
+    playAudio()
     // Announce winner
   }
 }
@@ -178,9 +176,11 @@ const unflipCards = () => {
 const switchPlayer = () => {
   if (playerTurn === 1) {
     playerTurn = 2
+    player1Name.style.backgroundColor = "white"
     console.log("player2")
   } else {
     playerTurn = 1
+    player2Name.style.backgroundColor = "white"
     console.log("player1")
   }
 }
@@ -188,7 +188,6 @@ const switchPlayer = () => {
 const updateScoreBoard = () => {
   if (playerTurn === 1) {
     player1Score += 5
-    // Use DOM manipulation to update the content of the score element
     score1.innerHTML = player1Score
   } else {
     player2Score += 5
@@ -198,12 +197,17 @@ const updateScoreBoard = () => {
 
 // to shuffle the cards every time the game start
 
+// used forEach so it can execute a provided function once for each element in an array
 function shuffle() {
   cards.forEach((card) => {
     let ramdomPos = Math.floor(Math.random() * 12)
     card.style.order = ramdomPos
+    // Math.random generates a random floating-point number between 0 (inclusive) and 1 (exclusive)
+    // Math.floor() function returns the largest integer less than or equal to a given number
   })
 }
+
+// The shuffle function iterates over each card element using forEach.
 
 const startGame = () => {
   startTimer()

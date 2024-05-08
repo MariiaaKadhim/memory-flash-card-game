@@ -10,7 +10,7 @@
 
 ### **_Description_**
 
-#### Matching card game. All cards are flipped and ahould guse the two matching cards.
+#### Matching card game. All cards are flipped and should guse the two matching cards. here will be 16 cards, and a timer. You must finish the game within one min. Each player will have one chance to play. The player who will have two same cards will get one point. Winner who gets more points.
 
 ---
 
@@ -46,5 +46,7 @@
 ##### pinterest: [pinterest](https://www.pinterest.com/)
 
 ##### gitHub: [gitHub](https://github.com/SEI-09-Bahrain/class_wiki?tab=readme-ov-file)
+
+##### W3schools: [W3schools](https://www.w3schools.com/)
 
 ---
