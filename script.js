@@ -150,8 +150,6 @@ const checkForWinner = () => {
     // Stop timer
 
     checkTimer()
-    alert(`Game Over!! Try Again`)
-    playAudio()
     // Announce winner
   }
 }
