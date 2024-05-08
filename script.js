@@ -49,6 +49,7 @@ const checkTimer = () => {
     clearInterval(timer)
     gameEnds()
     displayMessage(endTimerMessage)
+    playAudio()
   }
 }
 
@@ -65,6 +66,7 @@ const playAudio = () => {
   myAudio.play()
 }
 
+// flipping cards
 const flipCardsListeners = () => {
   cards.forEach((card) => {
     card.addEventListener("click", flipCard)
@@ -121,14 +123,6 @@ const disableCards = () => {
   secondCard = ""
 }
 
-// const hideCards = () => {
-//   if (firstCard.value === secondCard.value) {
-//     // to hide match cards when it has been chosen
-//     firstCard.parentElement.style.visibility = "hidden"
-//     secondCard.parentElement.style.visibility = "hidden"
-
-//   }
-// }
 const unflipCards = () => {
   setTimeout(() => {
     firstCard.parentElement.classList.remove("flip")
