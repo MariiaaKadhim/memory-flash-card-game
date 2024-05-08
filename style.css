@@ -84,7 +84,9 @@ li {
   justify-content: space-around;
 }
 
-h3 {
+h3,
+#score1,
+#score2 {
   margin: 5px;
   display: flex;
   justify-content: space-around;

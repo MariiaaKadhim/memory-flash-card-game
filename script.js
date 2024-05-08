@@ -144,26 +144,28 @@ const checkForMatch = () => {
 
 const checkForWinner = () => {
   // Check if all cards have been flipped
-  const allCardsAreFlipped = cards.every((card) =>
-    card.classList.contains("flipped")
-  )
-  if (allCardsAreFlipped) {
+  if (disableCards === flipCardsListeners) {
     console.log("all cards are flipped")
   }
   // Who has the higher score
-  if (player1Score > player2Score) {
+  else if (player1Score > player2Score) {
     console.log("player 1 win")
   } else if (player2Score > player1Score) {
     console.log("player 2 win")
   } else {
     onsole.log("we have a tie")
   }
+  // Stop timer
+  let timer = setInterval(function () {}, 1000)
+
+  if (winnerDeclared) {
+    clearInterval(timer)
+  }
   // Announce winner
   const alertMessage = (winning) => {
     // Show message here. You can use an alert box for example.
     alert(`congragulation ${winnerPlayer} is the winner `)
   }
-  // Stop timer
 }
 
 const disableCards = () => {
@@ -186,10 +188,11 @@ const unflipCards = () => {
 const switchPlayer = () => {
   if (playerTurn === 1) {
     playerTurn = 2
+    console.log("player2")
   } else {
     playerTurn = 1
+    console.log("player1")
   }
-  updateScoreBoard()
 }
 
 const updateScoreBoard = () => {
@@ -198,7 +201,7 @@ const updateScoreBoard = () => {
     // Use DOM manipulation to update the content of the score element
     score1.innerHTML = player1Score
   } else {
-    player2Score += 0
+    player2Score += 5
     score2.innerHTML = player2Score
   }
 }
