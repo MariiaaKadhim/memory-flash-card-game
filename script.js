@@ -1,6 +1,6 @@
 const time = document.querySelector("#timer")
-const scores = document.querySelectorAll("#score")
-
+const score1 = document.querySelector("#score1")
+const score2 = document.querySelector("#score2")
 const cards = document.querySelectorAll(".cards")
 
 let imgElements = document.getElementsByClassName("cards")
@@ -86,7 +86,7 @@ const playAudio = () => {
   myAudio.play()
 }
 
-const winningAudio = () => {
+const winAudio = () => {
   console.log("cong audio...")
   let winAudio = document.getElementById("winAudio")
   winAudio.play()
@@ -111,8 +111,8 @@ const matchLogic = (card) => {
 
 const showNames = () => {
   // TODO Fix this
-  player1Name.innerHTML = `${player1}: <span id="score">0</span>`
-  player2Name.innerHTML = `${player2}: <span id="score">0</span>`
+  player1Name.innerHTML = `${player1}: `
+  player2Name.innerHTML = `${player2}: `
 }
 
 const flipCard = (event) => {
@@ -133,12 +133,33 @@ const checkForMatch = () => {
     console.log("match!")
     // hideCards()
     disableCards() // if there is matching
-    socreBoread()
+    updateScoreBoard()
+    checkForWinner()
   } else {
     console.log("HERE I AM!")
     unflipCards() // turns both back if there is no matching
   }
   switchPlayer()
+}
+
+const checkForWinner = () => {
+  // Check if all cards have been flipped
+  const allCardsAreFlipped = cards.every((card) =>
+    card.classList.contains("flipped")
+  )
+  if (allCardsAreFlipped) {
+    console.log("all cards are flipped")
+  }
+  // Who has the higher score
+  if (player1Score > player2Score) {
+    console.log("player 1 win")
+  } else if (player2Score > player1Score) {
+    console.log("player 2 win")
+  } else {
+    onsole.log("we have a tie")
+  }
+  // Announce winner
+  // Stop timer
 }
 
 const disableCards = () => {
@@ -164,13 +185,17 @@ const switchPlayer = () => {
   } else {
     playerTurn = 1
   }
+  updateScoreBoard()
 }
 
-const socreBoread = () => {
+const updateScoreBoard = () => {
   if (playerTurn === 1) {
     player1Score += 5
-  } else if (playerTurn === 2) {
+    // Use DOM manipulation to update the content of the score element
+    score1.innerHTML = player1Score
+  } else {
     player2Score += 0
+    score2.innerHTML = player2Score
   }
 }
 
