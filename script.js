@@ -159,6 +159,10 @@ const checkForWinner = () => {
     onsole.log("we have a tie")
   }
   // Announce winner
+  const alertMessage = (winning) => {
+    // Show message here. You can use an alert box for example.
+    alert(`congragulation ${winnerPlayer} is the winner `)
+  }
   // Stop timer
 }
 
