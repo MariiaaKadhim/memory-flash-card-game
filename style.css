@@ -88,6 +88,7 @@ h3 {
   margin: 20px;
   display: flex;
   justify-content: space-around;
+  border-radius: 20%;
 
   height: 30px;
   width: 120px;
@@ -111,6 +112,8 @@ h3:hover {
 .Button {
   padding: 10px;
   margin-left: 5px;
+  font-weight: bold;
+  border-radius: 30%;
   border: 4px solid lightslategray;
   background-image: url(https://i.pinimg.com/originals/c8/43/0c/c8430c7757c13552fbbe1e669c859570.jpg);
 }
@@ -120,7 +123,10 @@ h3:hover {
   color: rgb(120, 167, 207);
 }
 #startGame {
+  margin: 5px;
   padding: 10px;
+  font-weight: bold;
+  border-radius: 30%;
   border: 4px solid lightslategray;
   background-image: url(https://i.pinimg.com/originals/c8/43/0c/c8430c7757c13552fbbe1e669c859570.jpg);
 }
