@@ -111,8 +111,8 @@ const matchLogic = (card) => {
 
 const showNames = () => {
   // TODO Fix this
-  player1Name.innerHTML = `${player1}: `
-  player2Name.innerHTML = `${player2}: `
+  player1Name.innerHTML = `${player1} `
+  player2Name.innerHTML = `${player2} `
 }
 
 const flipCard = (event) => {
