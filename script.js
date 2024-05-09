@@ -3,9 +3,6 @@ const score1 = document.querySelector("#score1")
 const score2 = document.querySelector("#score2")
 const cards = document.querySelectorAll(".cards")
 
-let imgElements = document.getElementsByClassName("cards")
-let imgElementsArray = [...imgElements] // for shuffling
-
 const player1 = localStorage.getItem("player1")
 console.log(`player 1 => ${player1}`)
 
@@ -40,11 +37,16 @@ const startTimer = () => {
   }, 1000)
 }
 
+const displaymessage = (message) => {
+  alert("Game Over!! Try Again")
+}
 const checkTimer = () => {
-  if (seconds === 60 || totalFlips === 16) {
+  if (seconds === 5 || totalFlips === 16) {
     console.log("stopping timer")
     clearInterval(timer)
     gameEnds()
+    displaymessage(endTimerMessage)
+    playAudio()
   }
 }
 
@@ -60,7 +62,7 @@ const gameEnds = () => {
   console.log("Game Over")
 }
 
-// game over text & audio (cheak later)
+// game over text & audio
 
 const playAudio = () => {
   console.log("Playing audio...")
@@ -114,7 +116,6 @@ const checkForMatch = () => {
   ) {
     console.log("match!")
     totalFlips += 2
-    // hideCards()
     disableCards() // if there is matching
     updateScoreBoard()
     checkForWinner()
@@ -142,10 +143,14 @@ const checkForWinner = () => {
       winner = player2
       winAudio()
       alert(`congragulation ${winner} is the winner `)
-    } else {
+    } else if (player2Score === player1Score) {
       console.log("we have a tie")
       playAudio()
       alert(`it is a tie `)
+    } else {
+      console.log("Game Over!! Try Again")
+      playAudio()
+      alert(`Game Over!! Try Again `)
     }
     // Stop timer
 
