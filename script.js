@@ -41,7 +41,7 @@ const displaymessage = (message) => {
   alert("Game Over!! Try Again")
 }
 const checkTimer = () => {
-  if (seconds === 5 || totalFlips === 16) {
+  if (seconds === 60 || totalFlips === 16) {
     console.log("stopping timer")
     clearInterval(timer)
     gameEnds()
